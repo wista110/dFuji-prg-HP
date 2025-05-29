@@ -1,0 +1,382 @@
+import React from 'react';
+import Head from 'next/head';
+import { GetStaticProps } from 'next';
+import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
+import { 
+  Code, 
+  Database, 
+  Globe, 
+  Smartphone, 
+  Server, 
+  GitBranch,
+  Mail,
+  Phone,
+  MapPin,
+  ExternalLink,
+  Github
+} from 'lucide-react';
+
+interface HomePageProps {
+  buildTime: string;
+}
+
+/**
+ * ホームページコンポーネント
+ * - ヒーローセクション
+ * - 技術スタック紹介
+ * - プロジェクトポートフォリオ
+ * - お問い合わせフォーム
+ */
+const HomePage: React.FC<HomePageProps> = ({ buildTime }) => {
+  const techStack = [
+    { name: 'Frontend', icon: Code, skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'] },
+    { name: 'Backend', icon: Server, skills: ['Node.js', 'Python', 'Express', 'FastAPI'] },
+    { name: 'Database', icon: Database, skills: ['PostgreSQL', 'MongoDB', 'Redis', 'Supabase'] },
+    { name: 'Mobile', icon: Smartphone, skills: ['React Native', 'Flutter', 'PWA'] },
+    { name: 'DevOps', icon: GitBranch, skills: ['Docker', 'AWS', 'Vercel', 'GitHub Actions'] },
+    { name: 'Web', icon: Globe, skills: ['SEO', 'Performance', 'Accessibility', 'UX/UI'] },
+  ];
+
+  const projects = [
+    {
+      title: 'ECサイト構築プラットフォーム',
+      description: 'Next.js + Stripe + Supabaseを使用したモダンなECサイト。高速で安全な決済システムを実装。',
+      tech: ['Next.js', 'TypeScript', 'Stripe', 'Supabase'],
+      status: 'リリース済み',
+    },
+    {
+      title: 'リアルタイムコラボレーションツール',
+      description: 'WebSocketを活用したリアルタイム編集機能付きドキュメント管理システム。',
+      tech: ['React', 'Node.js', 'Socket.io', 'MongoDB'],
+      status: '開発中',
+    },
+    {
+      title: 'データ分析ダッシュボード',
+      description: 'Python + FastAPI + Reactで構築したビジネス分析ツール。美しいデータビジュアライゼーション。',
+      tech: ['Python', 'FastAPI', 'React', 'D3.js'],
+      status: '企画中',
+    },
+  ];
+
+  return (
+    <>
+      <Head>
+        <title>DateFujinari - ITフリーランス開発者ポートフォリオ</title>
+        <meta 
+          name="description" 
+          content="ITフリーランス開発者DateFujinariのポートフォリオサイト。Next.js、React、TypeScriptを使用したモダンなWebアプリケーション開発を専門としています。" 
+        />
+        <meta name="keywords" content="フリーランス,Web開発,React,Next.js,TypeScript,ポートフォリオ" />
+        <meta name="author" content="DateFujinari" />
+        
+        {/* OGP メタタグ */}
+        <meta property="og:title" content="DateFujinari - ITフリーランス開発者" />
+        <meta property="og:description" content="モダンなWebアプリケーション開発を専門とするITフリーランス開発者のポートフォリオ" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="/og-image.jpg" />
+        <meta property="og:url" content="https://datefujinari.dev" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:creator" content="@datefujinari" />
+        
+        {/* 構造化データ */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "DateFujinari",
+              "jobTitle": "ITフリーランス開発者",
+              "url": "https://datefujinari.dev",
+              "sameAs": [
+                "https://instagram.com/datefujinari",
+                "https://twitter.com/datefujinari",
+                "https://youtube.com/@datefujinari"
+              ]
+            })
+          }}
+        />
+      </Head>
+
+      <div className="min-h-screen bg-white dark:bg-gray-900">
+        <Header />
+
+        <main>
+          {/* ヒーローセクション */}
+          <section id="home" className="pt-16 pb-20 bg-gradient-to-br from-primary-50 to-white dark:from-gray-900 dark:to-gray-800">
+            <div className="section-container">
+              <div className="text-center animate-fade-in">
+                <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                  <span className="gradient-text">DateFujinari</span>
+                </h1>
+                <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto text-balance">
+                  モダンなWebアプリケーション開発を専門とする<br />
+                  ITフリーランス開発者
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <a
+                    href="#projects"
+                    className="btn btn-primary px-8 py-4 text-lg"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                  >
+                    プロジェクトを見る
+                  </a>
+                  <a
+                    href="#contact"
+                    className="btn btn-secondary px-8 py-4 text-lg"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                  >
+                    お問い合わせ
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 技術スタックセクション */}
+          <section id="skills" className="py-20">
+            <div className="section-container">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">技術スタック</h2>
+                <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                  フルスタック開発に対応した幅広い技術を習得し、最適なソリューションを提供します
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {techStack.map((category, index) => {
+                  const IconComponent = category.icon;
+                  return (
+                    <div 
+                      key={category.name} 
+                      className="card p-6 animate-fade-in"
+                      style={{ animationDelay: `${index * 100}ms` }}
+                    >
+                      <div className="flex items-center mb-4">
+                        <IconComponent size={24} className="text-primary-600 dark:text-primary-400 mr-3" />
+                        <h3 className="text-xl font-semibold">{category.name}</h3>
+                      </div>
+                      <ul className="space-y-2">
+                        {category.skills.map((skill) => (
+                          <li key={skill} className="text-gray-600 dark:text-gray-300 flex items-center">
+                            <span className="w-2 h-2 bg-primary-600 dark:bg-primary-400 rounded-full mr-3"></span>
+                            {skill}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+
+          {/* プロジェクトセクション */}
+          <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-800">
+            <div className="section-container">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">プロジェクト</h2>
+                <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                  これまでに手がけたプロジェクトの一部をご紹介します
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+                {projects.map((project, index) => (
+                  <div 
+                    key={project.title} 
+                    className="card p-6 animate-slide-up"
+                    style={{ animationDelay: `${index * 150}ms` }}
+                  >
+                    <div className="flex justify-between items-start mb-4">
+                      <h3 className="text-xl font-semibold">{project.title}</h3>
+                      <span className={`px-2 py-1 text-xs rounded-full ${
+                        project.status === 'リリース済み' 
+                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
+                          : project.status === '開発中'
+                          ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
+                          : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
+                      }`}>
+                        {project.status}
+                      </span>
+                    </div>
+                    
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                      {project.description}
+                    </p>
+                    
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tech.map((tech) => (
+                        <span 
+                          key={tech}
+                          className="px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-xs rounded"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <div className="flex space-x-3">
+                      <button className="flex items-center space-x-1 text-sm text-primary-600 dark:text-primary-400 hover:underline focus-ring rounded">
+                        <Github size={16} />
+                        <span>コード</span>
+                      </button>
+                      <button className="flex items-center space-x-1 text-sm text-primary-600 dark:text-primary-400 hover:underline focus-ring rounded">
+                        <ExternalLink size={16} />
+                        <span>デモ</span>
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* お問い合わせセクション */}
+          <section id="contact" className="py-20">
+            <div className="section-container">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">お問い合わせ</h2>
+                <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                  プロジェクトのご相談やお見積もりなど、お気軽にお問い合わせください
+                </p>
+              </div>
+
+              <div className="max-w-4xl mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                  {/* 連絡先情報 */}
+                  <div className="space-y-8">
+                    <h3 className="text-2xl font-semibold mb-6">連絡先</h3>
+                    
+                    <div className="space-y-4">
+                      <div className="flex items-center space-x-3">
+                        <Mail className="text-primary-600 dark:text-primary-400" size={20} />
+                        <span>contact@datefujinari.dev</span>
+                      </div>
+                      
+                      <div className="flex items-center space-x-3">
+                        <Phone className="text-primary-600 dark:text-primary-400" size={20} />
+                        <span>お問い合わせフォームよりご連絡ください</span>
+                      </div>
+                      
+                      <div className="flex items-center space-x-3">
+                        <MapPin className="text-primary-600 dark:text-primary-400" size={20} />
+                        <span>日本全国（リモート対応）</span>
+                      </div>
+                    </div>
+
+                    <div className="pt-6">
+                      <h4 className="font-semibold mb-4">対応可能な案件</h4>
+                      <ul className="space-y-2 text-gray-600 dark:text-gray-300">
+                        <li>• Webアプリケーション開発</li>
+                        <li>• モバイルアプリ開発</li>
+                        <li>• API開発・統合</li>
+                        <li>• パフォーマンス改善</li>
+                        <li>• 技術コンサルティング</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* お問い合わせフォーム */}
+                  <div className="card p-8">
+                    <h3 className="text-2xl font-semibold mb-6">メッセージ送信</h3>
+                    
+                    <form className="space-y-6">
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium mb-2">
+                          お名前 *
+                        </label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          required
+                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 
+                                   rounded-lg focus-ring bg-white dark:bg-gray-700"
+                        />
+                      </div>
+                      
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium mb-2">
+                          メールアドレス *
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          required
+                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 
+                                   rounded-lg focus-ring bg-white dark:bg-gray-700"
+                        />
+                      </div>
+                      
+                      <div>
+                        <label htmlFor="subject" className="block text-sm font-medium mb-2">
+                          件名
+                        </label>
+                        <input
+                          type="text"
+                          id="subject"
+                          name="subject"
+                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 
+                                   rounded-lg focus-ring bg-white dark:bg-gray-700"
+                        />
+                      </div>
+                      
+                      <div>
+                        <label htmlFor="message" className="block text-sm font-medium mb-2">
+                          メッセージ *
+                        </label>
+                        <textarea
+                          id="message"
+                          name="message"
+                          rows={5}
+                          required
+                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 
+                                   rounded-lg focus-ring bg-white dark:bg-gray-700 resize-vertical"
+                        ></textarea>
+                      </div>
+                      
+                      <button
+                        type="submit"
+                        className="w-full btn btn-primary py-3"
+                      >
+                        送信する
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <Footer />
+      </div>
+
+      {/* 開発情報（デバッグ用） */}
+      <div className="hidden">
+        Built at: {buildTime}
+      </div>
+    </>
+  );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {
+      buildTime: new Date().toISOString(),
+    },
+  };
+};
+
+export default HomePage; 
