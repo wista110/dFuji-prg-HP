@@ -28,11 +28,13 @@ export const Header: React.FC = () => {
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
     
-    // スムーススクロール
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    // モバイルメニューが閉じるまで少し待ってからスクロール
+    setTimeout(() => {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   };
 
   const toggleMobileMenu = () => {
@@ -85,7 +87,7 @@ export const Header: React.FC = () => {
               <select
                 value={theme}
                 onChange={(e) => setTheme(e.target.value as any)}
-                className="appearance-none bg-transparent focus-ring rounded-lg p-2 
+                className="appearance-none bg-transparent focus-ring rounded-lg p-2 pr-10
                          text-gray-700 dark:text-gray-300 cursor-pointer"
                 aria-label="テーマを選択"
               >
@@ -95,7 +97,7 @@ export const Header: React.FC = () => {
                   </option>
                 ))}
               </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                 {themeOptions.find(opt => opt.value === theme)?.icon && (
                   React.createElement(
                     themeOptions.find(opt => opt.value === theme)!.icon,

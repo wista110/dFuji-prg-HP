@@ -16,6 +16,7 @@ import {
   ExternalLink,
   Github
 } from 'lucide-react';
+import { useTilt } from '@/utils/useTilt';
 
 interface HomePageProps {
   buildTime: string;
@@ -39,37 +40,44 @@ const HomePage: React.FC<HomePageProps> = ({ buildTime }) => {
   ];
 
   const projects = [
-
     {
       title: '木工製品のECサイト構築',
       description: 'Next.js + Stripe + Supabaseを使用したモダンなECサイト。高速で安全な決済システムを実装。',
       tech: ['Next.js', 'TypeScript', 'Stripe', 'Supabase'],
       status: 'リリース済み',
+      githubUrl: null,
+      demoUrl: null,
     },
     {
       title: 'HP制作',
       description: 'レスポンシブ対応の企業サイト・ポートフォリオサイト制作。SEO最適化とアクセシビリティを重視した高品質なWebサイト。',
       tech: ['Next.js', 'TypeScript', 'Tailwind CSS'],
       status: 'リリース済み',
+      githubUrl: null,
+      demoUrl: 'https://hicompgroup.co.jp/',
     },
     {
       title: 'FX自動売買ツール開発',
       description: 'MT4/MT5対応のEA開発・バックテスト・最適化を行う統合開発環境。生成AIを活用したアドバイザー機能',
       tech: ['Python', 'MQL4/5', 'TensorFlow', 'PostgreSQL'],
       status: '開発中',
+      githubUrl: null,
+      demoUrl: null,
     },
     {
       title: 'フィットネスモバイルアプリ開発',
       description: 'Flutter + Firebase + Dartで構築したモバイル向けフィットネスアプリ。進捗、週間トラッキング、プッシュ通知機能を実装。',
       tech: ['Flutter', 'Dart', 'Firebase', 'AWS (EC2, S3, DynamoDB)','PostgreSQL'],
       status: '企画中',
+      githubUrl: null,
+      demoUrl: null,
     },
   ];
 
   return (
     <>
       <Head>
-        <title>DateFujinari - ITフリーランス開発者ポートフォリオ</title>
+        <title>DateFujinari</title>
         <meta 
           name="description" 
           content="ITフリーランス開発者DateFujinariのポートフォリオサイト。Next.js、React、TypeScriptを使用したモダンなWebアプリケーション開発を専門としています。" 
@@ -77,11 +85,17 @@ const HomePage: React.FC<HomePageProps> = ({ buildTime }) => {
         <meta name="keywords" content="フリーランス,Web開発,React,Next.js,TypeScript,ポートフォリオ" />
         <meta name="author" content="DateFujinari" />
         
+        {/* ファビコン（最適化版） */}
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="shortcut icon" href="images/d-fuji-logo.png" />
+        
         {/* OGP メタタグ */}
         <meta property="og:title" content="DateFujinari - ITフリーランス開発者" />
         <meta property="og:description" content="モダンなWebアプリケーション開発を専門とするITフリーランス開発者のポートフォリオ" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="/og-image.jpg" />
+        <meta property="og:image" content="images/d-fuji-logo.png" />
         <meta property="og:url" content="https://datefujinari.dev" />
         
         {/* Twitter Card */}
@@ -113,20 +127,24 @@ const HomePage: React.FC<HomePageProps> = ({ buildTime }) => {
 
         <main>
           {/* ヒーローセクション */}
-          <section id="home" className="pt-16 pb-20 bg-gradient-to-br from-primary-50 to-white dark:from-gray-900 dark:to-gray-800">
-            <div className="section-container">
+          <section 
+            id="home" 
+            className="pt-20 md:pt-24 pb-20 parallax-bg"
+            style={{ backgroundImage: 'url(/images/d-fuji-bg.png)' }}
+          >
+            <div className="section-container parallax-content">
               <div className="text-center animate-fade-in">
                 <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                  <span className="gradient-text">DateFujinari</span>
+                  <span className="text-white drop-shadow-lg">DateFujinari</span>
                 </h1>
-                <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto text-balance">
+                <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto text-balance drop-shadow-md">
                   モダンなWebアプリケーション開発を専門とする<br />
                   ITフリーランス開発者
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <a
                     href="#projects"
-                    className="btn btn-primary px-8 py-4 text-lg"
+                    className="btn btn-primary px-8 py-4 text-lg shadow-lg"
                     onClick={(e) => {
                       e.preventDefault();
                       document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' });
@@ -136,7 +154,7 @@ const HomePage: React.FC<HomePageProps> = ({ buildTime }) => {
                   </a>
                   <a
                     href="#contact"
-                    className="btn btn-secondary px-8 py-4 text-lg"
+                    className="btn btn-secondary px-8 py-4 text-lg shadow-lg bg-white/10 backdrop-blur-sm text-white border-white/30 hover:bg-white/20"
                     onClick={(e) => {
                       e.preventDefault();
                       document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -150,7 +168,7 @@ const HomePage: React.FC<HomePageProps> = ({ buildTime }) => {
           </section>
 
           {/* 技術スタックセクション */}
-          <section id="skills" className="py-20">
+          <section id="skills" className="pt-20 md:pt-24 pb-20">
             <div className="section-container">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">技術スタック</h2>
@@ -161,11 +179,15 @@ const HomePage: React.FC<HomePageProps> = ({ buildTime }) => {
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {techStack.map((category, index) => {
+                  // eslint-disable-next-line react-hooks/rules-of-hooks
+                  const tiltRef = useTilt({ maxTilt: 15, scale: 1.1 });
+                  
                   const IconComponent = category.icon;
                   return (
                     <div 
-                      key={category.name} 
-                      className="card p-6 animate-fade-in"
+                      key={category.name}
+                      ref={tiltRef}
+                      className="card p-6 animate-fade-in cursor-pointer"
                       style={{ animationDelay: `${index * 100}ms` }}
                     >
                       <div className="flex items-center mb-4">
@@ -188,7 +210,7 @@ const HomePage: React.FC<HomePageProps> = ({ buildTime }) => {
           </section>
 
           {/* プロジェクトセクション */}
-          <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-800">
+          <section id="projects" className="pt-20 md:pt-24 pb-20 bg-gray-50 dark:bg-gray-800">
             <div className="section-container">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">プロジェクト</h2>
@@ -198,58 +220,89 @@ const HomePage: React.FC<HomePageProps> = ({ buildTime }) => {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-                {projects.map((project, index) => (
-                  <div 
-                    key={project.title} 
-                    className="card p-6 animate-slide-up"
-                    style={{ animationDelay: `${index * 150}ms` }}
-                  >
-                    <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-xl font-semibold">{project.title}</h3>
-                      <span className={`px-2 py-1 text-xs rounded-full ${
-                        project.status === 'リリース済み' 
-                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
-                          : project.status === '開発中'
-                          ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
-                          : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
-                      }`}>
-                        {project.status}
-                      </span>
-                    </div>
-                    
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      {project.description}
-                    </p>
-                    
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tech.map((tech) => (
-                        <span 
-                          key={tech}
-                          className="px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-xs rounded"
-                        >
-                          {tech}
+                {projects.map((project, index) => {
+                  // eslint-disable-next-line react-hooks/rules-of-hooks
+                  const tiltRef = useTilt({ maxTilt: 15, scale: 1.1 });
+                  
+                  return (
+                    <div 
+                      key={project.title}
+                      ref={tiltRef}
+                      className="card p-6 animate-slide-up cursor-pointer"
+                      style={{ animationDelay: `${index * 150}ms` }}
+                    >
+                      <div className="flex justify-between items-start mb-4">
+                        <h3 className="text-xl font-semibold">{project.title}</h3>
+                        <span className={`px-2 py-1 text-xs rounded-full ${
+                          project.status === 'リリース済み' 
+                            ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
+                            : project.status === '開発中'
+                            ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
+                            : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
+                        }`}>
+                          {project.status}
                         </span>
-                      ))}
+                      </div>
+                      
+                      <p className="text-gray-600 dark:text-gray-300 mb-4">
+                        {project.description}
+                      </p>
+                      
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.tech.map((tech) => (
+                          <span 
+                            key={tech}
+                            className="px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-xs rounded"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      
+                      <div className="flex space-x-3">
+                        {project.githubUrl ? (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center space-x-1 text-sm text-primary-600 dark:text-primary-400 hover:underline focus-ring rounded px-2 py-1"
+                          >
+                            <Github size={16} />
+                            <span>コード</span>
+                          </a>
+                        ) : (
+                          <span className="flex items-center space-x-1 text-sm text-gray-400 dark:text-gray-600 px-2 py-1">
+                            <Github size={16} />
+                            <span>コード</span>
+                          </span>
+                        )}
+                        
+                        {project.demoUrl ? (
+                          <a
+                            href={project.demoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center space-x-1 text-sm text-primary-600 dark:text-primary-400 hover:underline focus-ring rounded px-2 py-1"
+                          >
+                            <ExternalLink size={16} />
+                            <span>デモ</span>
+                          </a>
+                        ) : (
+                          <span className="flex items-center space-x-1 text-sm text-gray-400 dark:text-gray-600 px-2 py-1">
+                            <ExternalLink size={16} />
+                            <span>デモ</span>
+                          </span>
+                        )}
+                      </div>
                     </div>
-                    
-                    <div className="flex space-x-3">
-                      <button className="flex items-center space-x-1 text-sm text-primary-600 dark:text-primary-400 hover:underline focus-ring rounded">
-                        <Github size={16} />
-                        <span>コード</span>
-                      </button>
-                      <button className="flex items-center space-x-1 text-sm text-primary-600 dark:text-primary-400 hover:underline focus-ring rounded">
-                        <ExternalLink size={16} />
-                        <span>デモ</span>
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </section>
 
           {/* お問い合わせセクション */}
-          <section id="contact" className="py-20">
+          <section id="contact" className="pt-20 md:pt-24 pb-20">
             <div className="section-container">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">お問い合わせ</h2>
