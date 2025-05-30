@@ -20,9 +20,9 @@ export const Header: React.FC = () => {
   ];
 
   const themeOptions = [
-    { value: 'light', icon: Sun, label: 'ライトモード' },
-    { value: 'dark', icon: Moon, label: 'ダークモード' },
-    { value: 'system', icon: Monitor, label: 'システム設定' },
+    { value: 'light', icon: Sun, label: 'ライト' },
+    { value: 'dark', icon: Moon, label: 'ダーク' },
+    { value: 'system', icon: Monitor, label: '自動' },
   ] as const;
 
   const handleNavClick = (href: string) => {

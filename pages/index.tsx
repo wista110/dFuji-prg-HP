@@ -30,31 +30,38 @@ interface HomePageProps {
  */
 const HomePage: React.FC<HomePageProps> = ({ buildTime }) => {
   const techStack = [
-    { name: 'Frontend', icon: Code, skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'] },
-    { name: 'Backend', icon: Server, skills: ['Node.js', 'Python', 'Express', 'FastAPI'] },
-    { name: 'Database', icon: Database, skills: ['PostgreSQL', 'MongoDB', 'Redis', 'Supabase'] },
-    { name: 'Mobile', icon: Smartphone, skills: ['React Native', 'Flutter', 'PWA'] },
-    { name: 'DevOps', icon: GitBranch, skills: ['Docker', 'AWS', 'Vercel', 'GitHub Actions'] },
-    { name: 'Web', icon: Globe, skills: ['SEO', 'Performance', 'Accessibility', 'UX/UI'] },
+    { name: 'Frontend', icon: Code, skills: ['Next.js', 'shadcn/ui', 'Tailwind CSS', 'Spline'] },
+    { name: 'Backend', icon: Server, skills: ['Hono', 'FastAPI', 'AWS/lambda', 'Firebase'] },
+    { name: 'Database', icon: Database, skills: ['PostgreSQL', 'Redis', 'Firestore'] },
+    { name: 'Mobile', icon: Smartphone, skills: ['Flutter', 'Dart', 'Firebase'] },
+    { name: 'ML/AI', icon: GitBranch, skills: ['TensorFlow', 'LangChain', 'RAG', 'OpenAI API'] },
+    { name: 'Finance', icon: Globe, skills: ['MQL4/5', 'Backtesting', 'Algorithmic Trading'] },
   ];
 
   const projects = [
+
     {
-      title: 'ECサイト構築プラットフォーム',
+      title: '木工製品のECサイト構築',
       description: 'Next.js + Stripe + Supabaseを使用したモダンなECサイト。高速で安全な決済システムを実装。',
       tech: ['Next.js', 'TypeScript', 'Stripe', 'Supabase'],
       status: 'リリース済み',
     },
     {
-      title: 'リアルタイムコラボレーションツール',
-      description: 'WebSocketを活用したリアルタイム編集機能付きドキュメント管理システム。',
-      tech: ['React', 'Node.js', 'Socket.io', 'MongoDB'],
+      title: 'HP制作',
+      description: 'レスポンシブ対応の企業サイト・ポートフォリオサイト制作。SEO最適化とアクセシビリティを重視した高品質なWebサイト。',
+      tech: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+      status: 'リリース済み',
+    },
+    {
+      title: 'FX自動売買ツール開発',
+      description: 'MT4/MT5対応のEA開発・バックテスト・最適化を行う統合開発環境。生成AIを活用したアドバイザー機能',
+      tech: ['Python', 'MQL4/5', 'TensorFlow', 'PostgreSQL'],
       status: '開発中',
     },
     {
-      title: 'データ分析ダッシュボード',
-      description: 'Python + FastAPI + Reactで構築したビジネス分析ツール。美しいデータビジュアライゼーション。',
-      tech: ['Python', 'FastAPI', 'React', 'D3.js'],
+      title: 'フィットネスモバイルアプリ開発',
+      description: 'Flutter + Firebase + Dartで構築したモバイル向けフィットネスアプリ。進捗、週間トラッキング、プッシュ通知機能を実装。',
+      tech: ['Flutter', 'Dart', 'Firebase', 'AWS (EC2, S3, DynamoDB)','PostgreSQL'],
       status: '企画中',
     },
   ];
@@ -275,13 +282,14 @@ const HomePage: React.FC<HomePageProps> = ({ buildTime }) => {
                     </div>
 
                     <div className="pt-6">
-                      <h4 className="font-semibold mb-4">対応可能な案件</h4>
+                      <h4 className="font-semibold mb-4">件名には、依頼内容を記載してください</h4>
                       <ul className="space-y-2 text-gray-600 dark:text-gray-300">
                         <li>• Webアプリケーション開発</li>
                         <li>• モバイルアプリ開発</li>
-                        <li>• API開発・統合</li>
-                        <li>• パフォーマンス改善</li>
+                        <li>• EAツール開発</li>
                         <li>• 技術コンサルティング</li>
+                        <li>• AI活用コンサルティング</li>
+                        <li>• その他</li>
                       </ul>
                     </div>
                   </div>
