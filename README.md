@@ -120,4 +120,4 @@ MIT License
 
 ---
 
-Built with ❤️ by DateFujinari 
+Built with by DateFujinari 
